@@ -396,3 +396,56 @@ h1 {
   height: auto;
   
 }*/
+
+/* Footer */
+.footer {
+  /*background-image: url(./img/metodokanban.png);*/
+  background-color: #2980b9;
+  color: white;
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+
+
+a:link, a:visited, a:active {
+  text-decoration:none;
+  color: white;
+}
+
+.footer-inner {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 10px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer div {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.footer div i p {
+  margin-right: 20px;
+}
+
+.footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  
+}
+
+.footer li {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    padding: 0 1px 0 2px;
+  }
+}

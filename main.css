@@ -71,7 +71,7 @@ h1 {
 }
 
 .container {
-  max-width: 1480px;
+  max-width: 1580px;
   margin: 0 auto;
   padding: 10px 0 0 0;
 }
@@ -403,7 +403,7 @@ h1 {
   background-color: #2980b9;
   color: white;
   font-size: 14px;
-  padding: 10px 0;
+  padding: 0px 0;
 }
 
 
@@ -414,7 +414,7 @@ a:link, a:visited, a:active {
 }
 
 .footer-inner {
-  max-width: 1250px;
+  max-width: 1450px;
   margin: 0 auto;
   padding: 0 10px 0 20px;
   display: flex;

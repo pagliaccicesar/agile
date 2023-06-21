@@ -1,119 +1,113 @@
+const navBar = document.querySelector(".nav");
+const navButton = document.querySelector(".nav-toggle");
+const counterElements = document.querySelectorAll(".get-started .counter");
+const footerForm = document.querySelector(".footer-form");
+const emailForm = footerForm.querySelector(".footer-email");
+const videoContainer = document.querySelector(".video-learning");
+const video = videoContainer.querySelector(".video");
+const progress = videoContainer.querySelector(".progress");
+const progressBar = videoContainer.querySelector(".progress-fill");
+const togglePlayButton = videoContainer.querySelector(".toggle");
+const skipButtons = videoContainer.querySelectorAll("[data-skip]");
+let mousedown = false;
 
-( function( window ) {
+// Hamburger Navigation
+function toggleNavigation() {
+  if (navBar.classList.contains("is-open")) {
+    this.setAttribute("aria-expanded", false);
+    navBar.classList.remove("is-open");
+  } else {
+    navBar.classList.add("is-open");
+    this.setAttribute("aria-expanded", true);
+  }
+}
 
-    'use strict';
-    
-    // class helper functions from bonzo https://github.com/ded/bonzo
-    
-    function classReg( className ) {
-      return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
+// Newsletter form submit
+function createAlert(elem, msg) {
+  if (footerForm.querySelector("span.form-error-message")) return;
+  const alertElement = document.createElement(elem);
+  alertElement.setAttribute("role", "alert");
+  alertElement.classList.add("form-error-message");
+  alertElement.textContent = msg;
+  emailForm.insertAdjacentElement("afterend", alertElement);
+}
+
+function handleFormSubmit(e) {
+  const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (!pattern.test(emailForm.value.trim())) {
+    e.preventDefault();
+    footerForm.classList.add("form-error");
+    createAlert("span", "Email is not valid");
+  }
+}
+
+// Video player
+function togglePlay() {
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
+}
+
+function changeButton() {
+  togglePlayButton.textContent = this.paused ? "►" : "❚❚";
+}
+
+function skipSeconds() {
+  video.currentTime += +this.dataset.skip;
+}
+
+function handleProgressBar() {
+  const percent = (video.currentTime / video.duration) * 100;
+  progressBar.style.flexBasis = `${percent}%`;
+}
+
+function handleProgressBarProgress(e) {
+  const progressTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = progressTime;
+}
+
+// Counters
+function counter(target, start, stop) {
+  target.innerText = 0.1;
+  const counterInterval = setInterval(() => {
+    start += 0.1;
+    const valueConverted = (Math.round(start * 100) / 100).toFixed(1);
+    target.innerText = valueConverted;
+    if (valueConverted == stop) {
+      clearInterval(counterInterval);
     }
-    
-    // classList support for class management
-    // altho to be fair, the api sucks because it won't accept multiple classes at once
-    var hasClass, addClass, removeClass;
-    
-    if ( 'classList' in document.documentElement ) {
-      hasClass = function( elem, c ) {
-        return elem.classList.contains( c );
-      };
-      addClass = function( elem, c ) {
-        elem.classList.add( c );
-      };
-      removeClass = function( elem, c ) {
-        elem.classList.remove( c );
-      };
-    }
-    else {
-      hasClass = function( elem, c ) {
-        return classReg( c ).test( elem.className );
-      };
-      addClass = function( elem, c ) {
-        if ( !hasClass( elem, c ) ) {
-          elem.className = elem.className + ' ' + c;
-        }
-      };
-      removeClass = function( elem, c ) {
-        elem.className = elem.className.replace( classReg( c ), ' ' );
-      };
-    }
-    
-    function toggleClass( elem, c ) {
-      var fn = hasClass( elem, c ) ? removeClass : addClass;
-      fn( elem, c );
-    }
-    
-    var classie = {
-      // full names
-      hasClass: hasClass,
-      addClass: addClass,
-      removeClass: removeClass,
-      toggleClass: toggleClass,
-      // short names
-      has: hasClass,
-      add: addClass,
-      remove: removeClass,
-      toggle: toggleClass
-    };
-    
-    // transport
-    if ( typeof define === 'function' && define.amd ) {
-      // AMD
-      define( classie );
-    } else {
-      // browser global
-      window.classie = classie;
-    }
-    
-    })( window );
-    
-    //fake jQuery
-    var $ = function(selector){
-      return document.querySelector(selector);
-    }
-    var accordion = $('.acc');
-    
-    
-    
-    
-    
-    //add event listener to all anchor tags with accordion title class
-    accordion.addEventListener("click",function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-      if(e.target && e.target.nodeName == "A") {
-        var classes = e.target.className.split(" ");
-        if(classes) {
-          for(var x = 0; x < classes.length; x++) {
-            if(classes[x] == "acc_title") {
-              var title = e.target;
-    
-              //next element sibling needs to be tested in IE8+ for any crashing problems
-              var content = e.target.parentNode.nextElementSibling;
-              
-              //use classie to then toggle the active class which will then open and close the accordion
-             
-              classie.toggle(title, 'acc_title_active');
-              //this is just here to allow a custom animation to treat the content
-              if(classie.has(content, 'acc_panel_col')) {
-                if(classie.has(content, 'anim_out')){
-                  classie.remove(content, 'anim_out');
-                }
-                classie.add(content, 'anim_in');
-    
-              }else{
-                 classie.remove(content, 'anim_in');
-                 classie.add(content, 'anim_out');
-              }
-              //remove or add the collapsed state
-              classie.toggle(content, 'acc_panel_col');
-    
-    
-    
-              
-            }
-          }
-        }
-        
-      }
-    });
+  }, 30);
+}
+
+function obCallBack(entries) {
+  entries.forEach((entry) => {
+    const { target } = entry;
+    const stopValue = target.innerText;
+    const startValue = 0;
+    if (!entry.isIntersecting) return;
+    counter(target, startValue, stopValue);
+    counterObserver.unobserve(target);
+  });
+}
+
+const counterObserver = new IntersectionObserver(obCallBack, { threshold: 1 });
+counterElements.forEach((counterElem) => counterObserver.observe(counterElem));
+
+// Event Listeners
+navButton.addEventListener("click", toggleNavigation);
+footerForm.addEventListener("submit", handleFormSubmit);
+video.addEventListener("click", togglePlay);
+video.addEventListener("play", changeButton);
+video.addEventListener("pause", changeButton);
+video.addEventListener("timeupdate", handleProgressBar);
+togglePlayButton.addEventListener("click", togglePlay);
+progress.addEventListener("click", handleProgressBarProgress);
+progress.addEventListener(
+  "mousemove",
+  (e) => mousedown && handleProgressBarProgress(e)
+);
+progress.addEventListener("mousedown", () => (mousedown = true));
+progress.addEventListener("mouseup", () => (mousedown = false));
+skipButtons.forEach((button) => button.addEventListener("click", skipSeconds));

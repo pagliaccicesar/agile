@@ -675,7 +675,7 @@ a {
   color: #585858;
 }
 
-@media (min-width: 32em) {
+@media (min-width: 60em) {
   .features__list {
     display: flex;
     justify-content: space-around;

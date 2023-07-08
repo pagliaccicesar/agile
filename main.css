@@ -545,6 +545,20 @@ a {
 .card:nth-child(5):before {
   background-image: url(./img/respeto1.jpg);
 }
+.card:nth-child(6):before  {
+   background-image: url(./img/cardvideo.png);
+} 
+/*video {
+  display: flex;
+  position: relative;
+  
+    
+   
+    z-index: -1;
+ 
+}*/
+
+
 
 .content {
   position: relative;

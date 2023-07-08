@@ -921,6 +921,12 @@ a {
   }
 }
 
+@media (max-width: 800px) {
+  .footer-link {
+    font-size: 0.77rem;
+}
+}
+
 .arrow-1,
 .arrow-2 {
   margin-top: 20px;

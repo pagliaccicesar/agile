@@ -216,10 +216,10 @@
             <p>
               Ingresa tu email para conocer más sobre nosotros.
             </p>
-            <form action="https://www.freecodecamp.com/email-submit" method="GET" id="form" class="footer-form">
-              <label for="email" class="visuallyhidden">Email address</label>
-              <input type="email" name="email" class="footer-email" placeholder="Email Address" id="email" spellcheck="false" aria-required="true" aria-invalid="false" />
-              <input type="submit" id="submit" class="button button-email" value="Subscribe" />
+            
+            <form action="correo.php" method="post" id="form" class="contactform">              
+              <input maxlength="50" type="email" name="email" class="footer-email" placeholder="Ingrese email" id="email" spellcheck="false" aria-required="true" aria-invalid="false" />              
+              <br><input type="submit" value="Submit"  class="button button-email"/>
             </form>
           </div>
           <ul class="footer-social">
@@ -444,7 +444,7 @@
       </svg>    
       
 
-    <script src="./main.js"></script>
+    <!--<script src="./main.js"></script>-->
     
 </body>
 </html>

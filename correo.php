@@ -1,6 +1,7 @@
 <?php 
 if(isset($_POST['email'])) { 
-    $email_to = "contacto@azagile.ar"; 
+    $email_to = "contacto@azagile.ar";
+    /*$email_to = "pagliaccicesar@gmail.com";*/  
     $email_subject = "Te quiero contactar desde wwww.azagile.ar";   
  
     function died($error) {
@@ -40,20 +41,29 @@ if(isset($_POST['email'])) {
 $headers = 'From: '.$email_from."\r\n". 
 'Reply-To: '.$email_from."\r\n" . 
 'X-Mailer: PHP/' . phpversion(); 
-@mail($email_to, $email_subject, $email_message, $headers);   
+@mail($email_to, $email_subject, $email_message, $headers);
+
+echo "<script>";
+echo "myFunction();";
+echo "</script>";
+
 ?>
 
 <?php
-header("Location: https://www.azagile.ar/index.html"); // Redirecionamos a Baulphp
-exit(); //terminamos la ejecución del script php, ya que si redirecionamos ya no nos interesa seguir con el codigo PHP anterior.
+
+
+
+
+header("Location: https://www.azagile.ar/index.html" );  
+exit();
  
 //<!-- include your own success html here --> 
-//<!--<h1 style="backgrund-color: red">Thank you for your message!</h1> <h2>We will contact you as soon as possible.</h2>-->
+//echo "<h1>Thank you for your message! We will contact you as soon as possible.</h1>"
 //<br>//
 //<br>//
 
 //<button><a href="./index.html">Home</a></button> 
  
 //<?php 
-}
+  }
  //?>

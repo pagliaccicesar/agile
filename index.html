@@ -205,22 +205,24 @@
             <div>
               <h3 class="footer-title">Contactanos</h3>
               <ul>
-                <li><a class="footer-link" href="#subscribe">Ventas</a></li>
-                <li><a class="footer-link" href="#subscribe">Soporte</a></li>
+                <li><a class="footer-link" href="mailto:contacto@azagile.ar">Ventas</a></li>
+                <li><a class="footer-link" href="mailto:contacto@azagile.ar">Soporte</a></li>
               </ul>
             </div>
           </nav>
           <div class="footer-newsletter" id="subscribe">
             
               <a href=""><img style="width:145px; height:45px;" src="./img/word.png" alt=""></a>
-            <p>
-              Ingresa tu email para conocer más sobre nosotros.
+            <p id="thankyou">
+              Quiero que me contacten.
             </p>
             
             <form action="correo.php" method="post" id="form" class="contactform">              
-              <input maxlength="50" type="email" name="email" class="footer-email" placeholder="Ingrese email" id="email" spellcheck="false" aria-required="true" aria-invalid="false" />              
-              <br><input type="submit" value="Submit"  class="button button-email"/>
+              <input maxlength="50" type="email" name="email" class="footer-email" placeholder="Ingrese un email" id="email" spellcheck="false" aria-required="true" aria-invalid="false" />              
+              <br><input type="submit" value="Submit"  class="button button-email" onclick="myFunction()"/>             
             </form>
+            
+           
           </div>
           <ul class="footer-social">
             <li>   

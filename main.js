@@ -111,3 +111,25 @@ progress.addEventListener(
 progress.addEventListener("mousedown", () => (mousedown = true));
 progress.addEventListener("mouseup", () => (mousedown = false));
 skipButtons.forEach((button) => button.addEventListener("click", skipSeconds));
+
+
+// contestacion de agradecimiento correo enviado
+
+// function myFunction() {
+//   var list = document.getElementsByClassName("gracias")[0];
+//   list.getElementsByClassName("gracias")[0].innerHTML = "Nos contactaremos!";
+// }
+
+
+
+
+// function escribir() {
+//   document.getElementById("mensaje").innerHTML = "Gracias por escribir";
+// }
+
+
+
+function myFunction() {
+  
+  document.getElementById("thankyou").innerHTML = "Gracias! Nos contactaremos!";
+}
